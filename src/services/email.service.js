@@ -15,11 +15,33 @@ class EmailService extends BaseService {
   }
 
   // ── CREATE ─────────────────────────────────────────────────────────────
-  // Inherited from BaseService (streaming insert handles ARRAY<STRUCT>).
-  // Override only to ensure a UUID is generated when ItemId is absent.
+  // Uses DML INSERT so rows are immediately available for UPDATE/DELETE.
+  // Attachments (ARRAY<STRUCT>) are passed as JSON and re-hydrated in BigQuery.
   async create(data) {
     if (!data.ItemId) data.ItemId = uuidv4();
-    return super.create(data);
+
+    const now = new Date();
+    const { Attachments = [], ...rest } = data;
+    rest.CreatedAt = now;
+    rest.UpdatedAt = now;
+
+    const cols   = Object.keys(rest).filter(k => this._safeCol(k));
+    const params = Object.fromEntries(cols.map(c => [c, rest[c]]));
+    params.attachments_json = JSON.stringify(Attachments);
+
+    const query = `
+      INSERT INTO ${this.tableRef} (${cols.join(', ')}, Attachments)
+      VALUES (${cols.map(c => `@${c}`).join(', ')}, ARRAY(
+        SELECT AS STRUCT
+          JSON_VALUE(a, '$.FileName')                      AS FileName,
+          CAST(JSON_VALUE(a, '$.FileSize') AS INT64)       AS FileSize,
+          JSON_VALUE(a, '$.ContentType')                   AS ContentType,
+          JSON_VALUE(a, '$.AttachmentId')                  AS AttachmentId
+        FROM UNNEST(JSON_QUERY_ARRAY(@attachments_json)) AS a
+      ))`;
+
+    await bigquery.query({ query, params });
+    return { ...rest, Attachments };
   }
 
   // ── UPDATE ─────────────────────────────────────────────────────────────

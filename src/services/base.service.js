@@ -64,7 +64,7 @@ class BaseService {
     return rows[0] || null;
   }
 
-  // ── CREATE (streaming insert — handles all BigQuery types natively) ────
+  // ── CREATE (DML INSERT — rows immediately available for UPDATE/DELETE) ──
   async create(data) {
     const now = new Date();
 
@@ -75,7 +75,11 @@ class BaseService {
     data.CreatedAt = now;
     if (this.hasUpdatedAt) data.UpdatedAt = now;
 
-    await this.bqTable.insert([data]);
+    const cols   = Object.keys(data).filter(k => this._safeCol(k));
+    const query  = `INSERT INTO ${this.tableRef} (${cols.join(', ')}) VALUES (${cols.map(c => `@${c}`).join(', ')})`;
+    const params = Object.fromEntries(cols.map(c => [c, data[c]]));
+
+    await bigquery.query({ query, params });
     return data;
   }
 

@@ -1,0 +1,407 @@
+@baseUrl = http://localhost:3000
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HEALTH
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Health check
+GET {{baseUrl}}/health
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STATUS  (PK: StatusId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all statuses
+GET {{baseUrl}}/api/status
+
+### List with pagination
+GET {{baseUrl}}/api/status?page=1&limit=10
+
+### Get one status
+GET {{baseUrl}}/api/status/1
+
+### Create a status
+POST {{baseUrl}}/api/status
+Content-Type: application/json
+
+{
+  "StatusName": "Open"
+}
+
+### Update a status
+PUT {{baseUrl}}/api/status/1
+Content-Type: application/json
+
+{
+  "StatusName": "Closed"
+}
+
+### Delete a status
+DELETE {{baseUrl}}/api/status/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CATEGORIES  (PK: CategoryId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all categories
+GET {{baseUrl}}/api/categories
+
+### Get one category
+GET {{baseUrl}}/api/categories/1
+
+### Create a category
+POST {{baseUrl}}/api/categories
+Content-Type: application/json
+
+{
+  "CategoryName": "Claims"
+}
+
+### Update a category
+PUT {{baseUrl}}/api/categories/1
+Content-Type: application/json
+
+{
+  "CategoryName": "Claims - Updated"
+}
+
+### Delete a category
+DELETE {{baseUrl}}/api/categories/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EVENT TYPES  (PK: EventId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all event types
+GET {{baseUrl}}/api/event-types
+
+### Get one event type
+GET {{baseUrl}}/api/event-types/1
+
+### Create an event type
+POST {{baseUrl}}/api/event-types
+Content-Type: application/json
+
+{
+  "EventTypeName": "Email Received"
+}
+
+### Update an event type
+PUT {{baseUrl}}/api/event-types/1
+Content-Type: application/json
+
+{
+  "EventTypeName": "Email Sent"
+}
+
+### Delete an event type
+DELETE {{baseUrl}}/api/event-types/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COUNTRIES  (PK: CountryId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all countries
+GET {{baseUrl}}/api/countries
+
+### Get one country
+GET {{baseUrl}}/api/countries/1
+
+### Create a country
+POST {{baseUrl}}/api/countries
+Content-Type: application/json
+
+{
+  "CountryName": "United States",
+  "CountryCode": "US"
+}
+
+### Update a country
+PUT {{baseUrl}}/api/countries/1
+Content-Type: application/json
+
+{
+  "CountryName": "United States of America",
+  "CountryCode": "US"
+}
+
+### Delete a country
+DELETE {{baseUrl}}/api/countries/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LINE OF BUSINESS  (PK: LoBId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all LoB
+GET {{baseUrl}}/api/lob
+
+### Get one LoB
+GET {{baseUrl}}/api/lob/1
+
+### Create a LoB
+POST {{baseUrl}}/api/lob
+Content-Type: application/json
+
+{
+  "LoBName": "Commercial Lines"
+}
+
+### Update a LoB
+PUT {{baseUrl}}/api/lob/1
+Content-Type: application/json
+
+{
+  "LoBName": "Personal Lines"
+}
+
+### Delete a LoB
+DELETE {{baseUrl}}/api/lob/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MAILBOXES  (PK: MailboxId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all mailboxes
+GET {{baseUrl}}/api/mailboxes
+
+### Get one mailbox
+GET {{baseUrl}}/api/mailboxes/1
+
+### Create a mailbox
+POST {{baseUrl}}/api/mailboxes
+Content-Type: application/json
+
+{
+  "MailboxAddress": "akepesbux@gmail.com",
+  "MailboxName": "Mailbox adicional de akepes",
+  "Description": "Es un mailbox de prueba para el backend node"
+}
+
+### Update a mailbox
+PUT {{baseUrl}}/api/mailboxes/1776266788409
+Content-Type: application/json
+
+{
+  "MailboxAddress": "akepesbu2@gmail.com",
+  "MailboxName": "Mailbox adicionalicimo de akepes",
+  "Description": "Es un mailbox de prueba para el backend node"
+  
+}
+
+### Delete a mailbox
+DELETE {{baseUrl}}/api/mailboxes/177626325908
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# USERS  (PK: UserId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all users
+GET {{baseUrl}}/api/users
+
+### Get one user
+GET {{baseUrl}}/api/users/1
+
+### Create a user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "UserName": "John Doe",
+  "UserEmail": "john.doe@aon.com"
+}
+
+### Update a user
+PUT {{baseUrl}}/api/users/1
+Content-Type: application/json
+
+{
+  "UserName": "John Doe",
+  "UserEmail": "john.doe@aon.com"
+}
+
+### Delete a user
+DELETE {{baseUrl}}/api/users/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MAILBOX MAPPINGS  (PK: AssignmentId INT64)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all mailbox mappings
+GET {{baseUrl}}/api/mailbox-mappings
+
+### Filter by mailbox
+GET {{baseUrl}}/api/mailbox-mappings?MailboxId=1
+
+### Get one mailbox mapping
+GET {{baseUrl}}/api/mailbox-mappings/1
+
+### Create a mailbox mapping
+POST {{baseUrl}}/api/mailbox-mappings
+Content-Type: application/json
+
+{
+  "MailboxId": 1,
+  "UserId": 1,
+  "LoBId": 1,
+  "CountryId": 1
+}
+
+### Update a mailbox mapping
+PUT {{baseUrl}}/api/mailbox-mappings/1
+Content-Type: application/json
+
+{
+  "MailboxId": 1,
+  "UserId": 2,
+  "LoBId": 1,
+  "CountryId": 1
+}
+
+### Delete a mailbox mapping
+DELETE {{baseUrl}}/api/mailbox-mappings/1
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EMAILS  (PK: ItemId STRING/UUID)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all emails
+GET {{baseUrl}}/api/emails
+
+### List with pagination
+GET {{baseUrl}}/api/emails?page=1&limit=20
+
+### Filter by status
+GET {{baseUrl}}/api/emails?StatusId=1
+
+### Filter by category
+GET {{baseUrl}}/api/emails?CategoryId=1
+
+### Filter by assigned user
+GET {{baseUrl}}/api/emails?AssignedToId=1
+
+### Filter by assignment
+GET {{baseUrl}}/api/emails?AssignmentId=1
+
+### Filter by sender
+GET {{baseUrl}}/api/emails?EmailFrom=someone@example.com
+
+### Get one email
+GET {{baseUrl}}/api/emails/your-item-uuid-here
+
+### Create an email (ItemId auto-generated if omitted)
+POST {{baseUrl}}/api/emails
+Content-Type: application/json
+
+{
+  "Subject": "Test email subject",
+  "EmailFrom": "sender@example.com",
+  "EmailTo": "claims@aon.com",
+  "EmailReceivedOn": "2026-04-15T10:00:00Z",
+  "StatusId": 1,
+  "CategoryId": 1,
+  "AssignedToId": 1,
+  "AssignmentId": 1,
+  "Attachments": []
+}
+
+### Create an email with attachments
+POST {{baseUrl}}/api/emails
+Content-Type: application/json
+
+{
+  "Subject": "Email with attachment",
+  "EmailFrom": "sender@example.com",
+  "EmailTo": "claims@aon.com",
+  "EmailReceivedOn": "2026-04-15T10:00:00Z",
+  "StatusId": 1,
+  "CategoryId": 1,
+  "AssignedToId": 1,
+  "AssignmentId": 1,
+  "Attachments": [
+    {
+      "FileName": "document.pdf",
+      "FileSize": 102400,
+      "ContentType": "application/pdf",
+      "AttachmentId": "att-uuid-here"
+    }
+  ]
+}
+
+### Update an email (scalar fields)
+PUT {{baseUrl}}/api/emails/your-item-uuid-here
+Content-Type: application/json
+
+{
+  "StatusId": 2,
+  "CategoryId": 1,
+  "AssignedToId": 1
+}
+
+### Update an email (including attachments)
+PUT {{baseUrl}}/api/emails/your-item-uuid-here
+Content-Type: application/json
+
+{
+  "StatusId": 2,
+  "Attachments": [
+    {
+      "FileName": "updated.pdf",
+      "FileSize": 204800,
+      "ContentType": "application/pdf",
+      "AttachmentId": "att-uuid-here"
+    }
+  ]
+}
+
+### Delete an email
+DELETE {{baseUrl}}/api/emails/your-item-uuid-here
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EVENTS  (PK: EventRecordId INT64 — append-only, no PUT)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List all events
+GET {{baseUrl}}/api/events
+
+### List with pagination
+GET {{baseUrl}}/api/events?page=1&limit=20
+
+### Get events for a specific email (by ItemId)
+GET {{baseUrl}}/api/events/by-item/your-item-uuid-here
+
+### Get one event
+GET {{baseUrl}}/api/events/1
+
+### Create an event
+POST {{baseUrl}}/api/events
+Content-Type: application/json
+
+{
+  "ItemId": "your-item-uuid-here",
+  "EventId": 1,
+  "UserId": 1,
+  "Notes": "Email assigned to claims team"
+}
+
+### Delete an event
+DELETE {{baseUrl}}/api/events/1

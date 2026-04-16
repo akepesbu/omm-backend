@@ -16,7 +16,8 @@ const createController = (service) => ({
 
   getById: async (req, res) => {
     try {
-      const record = await service.getById(req.params.id);
+      const id = service.pkType === 'INT64' ? Number(req.params.id) : req.params.id;
+      const record = await service.getById(id);
       if (!record) {
         return res.status(404).json({ success: false, error: 'Record not found.' });
       }
@@ -39,7 +40,8 @@ const createController = (service) => ({
 
   update: async (req, res) => {
     try {
-      const record = await service.update(req.params.id, req.body);
+      const id = service.pkType === 'INT64' ? Number(req.params.id) : req.params.id;
+      const record = await service.update(id, req.body);
       res.json({ success: true, data: record });
     } catch (err) {
       console.error(`[${service.tableName}] update error:`, err.message);
@@ -49,7 +51,8 @@ const createController = (service) => ({
 
   delete: async (req, res) => {
     try {
-      const result = await service.delete(req.params.id);
+      const id = service.pkType === 'INT64' ? Number(req.params.id) : req.params.id;
+      const result = await service.delete(id);
       res.json({ success: true, ...result });
     } catch (err) {
       console.error(`[${service.tableName}] delete error:`, err.message);
