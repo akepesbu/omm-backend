@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:3000
+@baseUrl = https://omm-backend-837517257785.europe-west1.run.app
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HEALTH
@@ -194,14 +194,14 @@ PUT {{baseUrl}}/api/mailboxes/1776266788409
 Content-Type: application/json
 
 {
-  "MailboxAddress": "akepesbu2@gmail.com",
-  "MailboxName": "Mailbox adicionalicimo de akepes",
+  "MailboxAddress": "akepesbu3@gmail.com",
+  "MailboxName": "Mailbox adicionalicimox de akepes",
   "Description": "Es un mailbox de prueba para el backend node"
   
 }
 
 ### Delete a mailbox
-DELETE {{baseUrl}}/api/mailboxes/177626325908
+DELETE {{baseUrl}}/api/mailboxes/1776266788409
 
 
 
